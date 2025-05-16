@@ -10,17 +10,31 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@tailwindcss/cli": "^4.1.7",
+    "@tailwindcss/vite": "^4.1.7",
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-opener": "^2",
+    "antd": "^5.25.1",
+    "js-sdsl": "^4.4.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@tauri-apps/api": "^2",
-    "@tauri-apps/plugin-opener": "^2"
+    "react-router-dom": "^7.6.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.7",
+    "@tauri-apps/cli": "^2",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.21",
+    "less": "^4.3.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.7",
     "typescript": "~5.6.2",
-    "vite": "^6.0.3",
-    "@tauri-apps/cli": "^2"
-  }
+    "vite": "^6.3.5"
+  },
+  "description": "This template should help get you started developing with Tauri, React and Typescript in Vite.",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
