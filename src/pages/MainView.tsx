@@ -1,5 +1,6 @@
 import {Button, Divider, Layout} from "antd"
 import 'tailwindcss'
+import EditorArea from "../components/EditorArea.tsx";
 
 export const scopedCSS = {
     layoutHeader: {
@@ -13,7 +14,8 @@ export const scopedCSS = {
 }
 
 export default function MainView() {
-    const navigationButton: Array<string> = ['文件', '设置']
+    const navigationButton: Array<{ key: number, label: string }> =
+        [{key: 1, label: '文件'}, {key: 2, label: '设置'}]
 
     return (
         <>
@@ -22,12 +24,13 @@ export default function MainView() {
                     <div>
                         {navigationButton.map(item =>
                             (<Button variant='text' color="default"
-                                     className="font-light text-sm p-2" >{item}</Button>)
+                                     className="font-light text-sm p-2" key={item.key}>{item.label}</Button>)
                         )}
                     </div>
                 </Layout.Header>
                 <Divider className="m-0"></Divider>
-                <Layout.Content>
+                <Layout.Content className='p-0 bg-white'>
+                    <EditorArea />
                 </Layout.Content>
             </Layout>
         </>
