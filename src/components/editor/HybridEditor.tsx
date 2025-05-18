@@ -5,9 +5,9 @@ import {ContentEditable} from '@lexical/react/LexicalContentEditable';
 import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {LexicalErrorBoundary} from '@lexical/react/LexicalErrorBoundary';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
-import '../assets/editor.less'
+import '../../assets/editor.less'
 import {TRANSFORMERS} from "@lexical/markdown";
-import {markdownNode} from "../utils/nodes.ts";
+import {markdownNode} from "../../utils/nodes.ts";
 
 
 function onError(error: any) {
@@ -17,7 +17,6 @@ function onError(error: any) {
 const theme = {
     ltr: 'ltr'
 }
-
 
 export default function EditorArea() {
 

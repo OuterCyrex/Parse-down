@@ -6,7 +6,7 @@ interface fileInfo {
     fileName: string
 }
 
-class FileInfo implements fileInfo {
+export class FileInfo implements fileInfo {
     openTime: number
     filePath: string
     fileName: string

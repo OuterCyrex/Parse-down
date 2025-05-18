@@ -1,6 +1,9 @@
-import {Button, Divider, Layout} from "antd"
+import { Divider, Layout} from "antd"
 import 'tailwindcss'
-import EditorArea from "../components/EditorArea.tsx";
+import Editor from '../components/editor/Editor.tsx'
+import {DefaultFuncButton, dropdownMenu} from "../types/functional.ts";
+import {useState} from "react";
+import FoldButtonList from "../components/FoldButton.tsx";
 
 export const scopedCSS = {
     layoutHeader: {
@@ -14,23 +17,40 @@ export const scopedCSS = {
 }
 
 export default function MainView() {
-    const navigationButton: Array<{ key: number, label: string }> =
-        [{key: 1, label: '文件'}, {key: 2, label: '设置'}]
+    const [mode, setMode] = useState<'split' | 'hybrid'>('split')
+
+    const navigationButtons: Array<dropdownMenu> = [
+        {
+            label: '文件',
+            buttons: []
+        },
+        {
+            label: '模式',
+            buttons: [
+                new DefaultFuncButton("双栏模式", () =>  {
+                    setMode(() => 'split')
+                }),
+                new DefaultFuncButton("混合模式 (测试中)",() => {
+                    setMode(() => 'hybrid')
+                }, false)
+            ]
+        }
+    ]
 
     return (
         <>
             <Layout >
                 <Layout.Header className='pl-1' style={scopedCSS.layoutHeader}>
                     <div>
-                        {navigationButton.map(item =>
-                            (<Button variant='text' color="default"
-                                     className="font-light text-sm p-2" key={item.key}>{item.label}</Button>)
+                        {navigationButtons.map((item, index) => (
+                            <FoldButtonList key={index} menu={item}></FoldButtonList>
+                            )
                         )}
                     </div>
                 </Layout.Header>
                 <Divider className="m-0"></Divider>
                 <Layout.Content className='p-0 bg-white'>
-                    <EditorArea />
+                    <Editor mode={mode}></Editor>
                 </Layout.Content>
             </Layout>
         </>
