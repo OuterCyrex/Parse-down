@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "parse-down",
+        "title": "Parse-down",
         "width": 800,
         "height": 600
       }
@@ -25,10 +25,11 @@
     "active": true,
     "targets": "all",
     "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/128x128@2x.png",
-      "icons/icon.icns",
+      "icons/16.png",
+      "icons/32.png",
+      "icons/128.png",
+      "icons/192.png",
+      "icons/512.png",
       "icons/icon.ico"
     ]
   }

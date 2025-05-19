@@ -1,4 +1,5 @@
-import { LinkList } from 'js-sdsl'
+import {__readFileHistory, __writeFileHistory} from "../api/history.ts";
+
 
 interface fileInfo {
     openTime: number
@@ -18,41 +19,38 @@ export class FileInfo implements fileInfo {
     }
 }
 
-export default class fileHistory {
-    items: LinkList<fileInfo>
+export class fileHistory {
+    items: Array<fileInfo>
     constructor() {
-        this.items = new LinkList<fileInfo>()
+        this.items = new Array<fileInfo>()
+    }
+
+    readFileHistory =  async (): Promise<void> => {
+        const json = await __readFileHistory()
+        this.items = JSON.parse(json) as Array<fileInfo>
+    }
+
+    writeFileHistory = async (): Promise<void> => {
+        return __writeFileHistory(JSON.stringify(this.items, null, 2))
     }
 
     add(filePath: string): void {
-        if (this.items.length >= 20) this.items.popFront()
+        this.remove(filePath)
 
-        this.items.forEach((item, index) => {
-            item.filePath === filePath && this.items.eraseElementByPos(index)
-        })
+        if (this.items.length >= 20) this.items.pop()
 
-        this.items.pushBack(new FileInfo(filePath))
+        this.items.push(new FileInfo(filePath))
     }
 
-    filter(keyWords: string): LinkList<fileInfo> {
-        let result = new LinkList<fileInfo>()
-        this.items.forEach(item => {
-            (item.filePath.includes(keyWords) || item.fileName.includes(keyWords)) && result.pushBack(item)
-        })
-        return result
+    filter(keyWords: string): Array<fileInfo> {
+        return this.items.filter(item => item.filePath.includes(keyWords))
     }
 
-    /** remove 删除当前文件历史中的对应 filePath 的信息
-     * 若文件信息存在并删除，则返回 true， 否则返回 false */
-    remove(filePath: string): boolean {
-        const formerLength = this.items.length
+    remove(filePath: string) {
+        this.items = this.items.filter(item => item.filePath !== filePath)
+    }
 
-        this.items.forEach((item, index) => {
-            if (item.filePath === filePath) {
-                this.items.eraseElementByPos(index)
-            }
-        })
-
-        return !(formerLength === this.items.length)
+    last(): fileInfo {
+        return this.items[this.items.length - 1]
     }
 }
